@@ -6,10 +6,12 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.geom.Line2D;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -23,6 +25,7 @@ public class DrawingCanvas extends JComponent
 {
 
     int x1, y1;
+    Graphics2D g;
 
     public DrawingCanvas()
     {
@@ -34,7 +37,7 @@ public class DrawingCanvas extends JComponent
         JButton dd = new JButton();
         dd.setSize(70, 80);
         dd.setLocation(200, 200);
-        dd.setText("Fack Java");
+        dd.setText("Test");
         dd.addActionListener((ActionEvent e) ->
         {
             JOptionPane.showMessageDialog(Paint0.FrameHandle, e.getActionCommand());
@@ -50,11 +53,19 @@ public class DrawingCanvas extends JComponent
             @Override
             public void mousePressed(MouseEvent e)
             {
+                // Save the origin point of the new shape
                 x1 = e.getX();
                 y1 = e.getY();
+
                 // Mouse click on drawing canvas ( add a shape )
                 //JOptionPane.showMessageDialog(Paint0.FrameHandle,
                 System.out.println("Coordinates:X:" + e.getX() + ",Y:" + e.getY());
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+                // Call the method to draw the shape here
             }
         });
 
@@ -66,8 +77,13 @@ public class DrawingCanvas extends JComponent
                 int x = e.getX();
                 int y = e.getY();
                 //JOptionPane.showMessageDialog(Paint0.FrameHandle,
-                System.out.println(("Drag Coordinates:X:" + (x1 - x) + ",Y:" + (y1 - y)));
-                //repaint();
+                int distance = (int) Math.sqrt(
+                        (Math.pow((x1 - x), 2)
+                        + Math.pow((y1 - y), 2)));
+                System.out.println(("Drag Coordinates:X:" + (x1 - x) + ",Y:" + (y1 - y) + " Distance:" + distance));
+
+                //Line2D d = new Line2D.Float(x1, y1, x, y);
+                repaint();
             }
         });
 
