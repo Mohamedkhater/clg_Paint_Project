@@ -71,22 +71,28 @@ public final class PaintBrushApp extends JFrame
 
         Box theBox = Box.createVerticalBox();
 
+        // Create the shape button objects
         BrashBut = addImageToButtons("./src/images/brushIcon.png", 1);
         EllipseBut = addImageToButtons("./src/images/Ellipse.png", 3);
         RectangleBut = addImageToButtons("./src/images/Rectangle.png", 4);
         LineBut = addImageToButtons("./src/images/Line.png", 2);
 
+        // Create the control button objects
         FillBut = addImageToColorButtons("./src/images/Fill.png", 5, true);
         StrokeBut = addImageToColorButtons("./src/images/Stroke.png", 7, false);
+
         clear = new JButton("CLEAR");
-        BrashBut.setToolTipText("Brash");
+
         RectangleBut.setPreferredSize(new Dimension(2, 26));
+
+        BrashBut.setToolTipText("Brash");
         EllipseBut.setToolTipText("Ellise");
         RectangleBut.setToolTipText("Rectangle");
         LineBut.setToolTipText("Line");
         FillBut.setToolTipText("Fill");
         StrokeBut.setToolTipText("Stroke");
 
+        // Add items to the vertical box ( stack panel )
         theBox.add(BrashBut);
         theBox.add(LineBut);
         theBox.add(EllipseBut);
@@ -95,6 +101,7 @@ public final class PaintBrushApp extends JFrame
         theBox.add(StrokeBut);
         theBox.add(FillBut);
         theBox.add(clear);
+
         transLabel = new JLabel("Transparency: 1 ");
         tranSlider = new JSlider(1, 99, 99);
 
@@ -129,6 +136,8 @@ public final class PaintBrushApp extends JFrame
 
     public JButton addImageToButtons(String iconfile, final int activeNumber)
     {
+        // This method creates the shape button object and sets the action number for it
+        // Controller
 
         JButton thebut = new JButton();
         Icon buttonicon = new ImageIcon(iconfile);
@@ -136,9 +145,11 @@ public final class PaintBrushApp extends JFrame
         thebut.addActionListener(new ActionListener()
         {
 
+            // Add the action listner to this button            
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                // Set the number of the active shape
                 recentActionValue = activeNumber;
 
             }
@@ -151,6 +162,8 @@ public final class PaintBrushApp extends JFrame
     public JButton addImageToColorButtons(String iconfile, final int activeNumber, final boolean stroke)
     {
 
+        // This method creates the control button object and sets the action number for it
+        // Controller
         JButton thebut = new JButton();
         Icon buttonicon = new ImageIcon(iconfile);
         thebut.setIcon(buttonicon);
@@ -175,6 +188,8 @@ public final class PaintBrushApp extends JFrame
     public class Canvas extends JComponent
     {
 
+        // Drawing area - controller package
+
         ArrayList<Shape> shapes = new ArrayList<Shape>();
         ArrayList<Color> shapeFill = new ArrayList<Color>();
         ArrayList<Color> shapeStroke = new ArrayList<Color>();
@@ -184,6 +199,7 @@ public final class PaintBrushApp extends JFrame
         public Canvas()
         {
 
+            // Those methods shall be in the view package
             this.addMouseListener(new MouseAdapter()
             {
 
@@ -238,6 +254,7 @@ public final class PaintBrushApp extends JFrame
             this.addMouseMotionListener(new MouseMotionAdapter()
             {
 
+                // This method shall be in the view package
                 @Override
                 public void mouseDragged(MouseEvent e)
                 {
@@ -267,7 +284,7 @@ public final class PaintBrushApp extends JFrame
 
         public void paint(Graphics g)
         {
-
+            // This method shall be in the controller
             graphicalDrawing = (Graphics2D) g;
             graphicalDrawing.setStroke(new BasicStroke(0));
 
@@ -315,6 +332,7 @@ public final class PaintBrushApp extends JFrame
 
         public void clear()
         {
+            // This method shall be in the controller
             graphicalDrawing.setPaint(Color.white);
             graphicalDrawing.fillRect(0, 0, getSize().width, getSize().height);
             graphicalDrawing.setPaint(Color.black);
@@ -323,7 +341,7 @@ public final class PaintBrushApp extends JFrame
 
         private Rectangle2D.Float drawRectangle(int x1, int y1, int x2, int y2)
         {
-
+            // This method shall be in the controller
             int x = Math.min(x1, x2);
             int y = Math.min(y1, y2);
 
@@ -336,7 +354,7 @@ public final class PaintBrushApp extends JFrame
 
         private Ellipse2D.Float drawEllipse(int x1, int y1, int x2, int y2)
         {
-
+            // This method shall be in the controller
             int x = Math.min(x1, x2);
             int y = Math.min(y1, y2);
 
@@ -349,13 +367,13 @@ public final class PaintBrushApp extends JFrame
 
         private Line2D.Float drawLine(int x1, int y1, int x2, int y2)
         {
-
+            // This method shall be in the controller
             return new Line2D.Float(x1, y1, x2, y2);
         }
 
         private Ellipse2D.Float drawBrush(int x1, int y1, int brashStrokeWeidth, int brushStrokeHeight)
         {
-
+            // This method shall be in the controller
             return new Ellipse2D.Float(x1, y1, brashStrokeWeidth, brushStrokeHeight);
 
         }
@@ -364,7 +382,7 @@ public final class PaintBrushApp extends JFrame
 
     public class ListenForSlider implements ChangeListener
     {
-
+            // This method shall be in the view
         @Override
         public void stateChanged(ChangeEvent e)
         {
