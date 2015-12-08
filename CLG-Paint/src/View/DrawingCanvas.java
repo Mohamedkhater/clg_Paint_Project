@@ -59,13 +59,15 @@ public class DrawingCanvas extends JComponent
 
                 // Mouse click on drawing canvas ( add a shape )
                 //JOptionPane.showMessageDialog(Paint0.FrameHandle,
-                System.out.println("Coordinates:X:" + e.getX() + ",Y:" + e.getY());
+                System.out.println("Coordinates:"
+                        + "X:" + e.getX()
+                        + ",Y:" + e.getY());
             }
 
             @Override
             public void mouseReleased(MouseEvent e)
             {
-                // Call the method to draw the shape here
+                // Mouse release button, final drawing of the shape
             }
         });
 
@@ -74,14 +76,26 @@ public class DrawingCanvas extends JComponent
             @Override
             public void mouseDragged(MouseEvent e)
             {
+                // Get the coordinates of the end point
                 int x = e.getX();
                 int y = e.getY();
                 //JOptionPane.showMessageDialog(Paint0.FrameHandle,
+                
+                // Calculate the distance between the 2 points
                 int distance = (int) Math.sqrt(
                         (Math.pow((x1 - x), 2)
                         + Math.pow((y1 - y), 2)));
-                System.out.println(("Drag Coordinates:X:" + (x1 - x) + ",Y:" + (y1 - y) + " Distance:" + distance));
 
+                System.out.println(("Drag Coordinates:"
+                        + "X:" + (x1 - x)
+                        + ", Y:" + (y1 - y)
+                        + ", Distance:" + distance));
+
+                // Send the starting and end point as parametetrs to the drawing function
+                // at this point the program should know what shape will be drawn
+                
+                // Call the method to draw the shape preview here
+                
                 //Line2D d = new Line2D.Float(x1, y1, x, y);
                 repaint();
             }
