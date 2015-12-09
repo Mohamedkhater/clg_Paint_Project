@@ -74,11 +74,11 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="BrushButton" alignment="0" pref="91" max="32767" attributes="0"/>
-                      <Component id="BrushButton1" alignment="1" pref="91" max="32767" attributes="0"/>
-                      <Component id="BrushButton2" alignment="0" pref="91" max="32767" attributes="0"/>
-                      <Component id="BrushButton3" alignment="1" pref="91" max="32767" attributes="0"/>
-                      <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="brushButton" alignment="0" pref="91" max="32767" attributes="0"/>
+                      <Component id="lineButton" alignment="1" pref="91" max="32767" attributes="0"/>
+                      <Component id="ellipseButton" alignment="0" pref="91" max="32767" attributes="0"/>
+                      <Component id="rectangleButton" alignment="1" pref="91" max="32767" attributes="0"/>
+                      <Component id="colorPickerButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -88,46 +88,46 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="BrushButton" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="brushButton" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="BrushButton1" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="lineButton" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="BrushButton2" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="ellipseButton" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="BrushButton3" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="rectangleButton" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <Component id="colorPickerButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="206" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="BrushButton">
+        <Component class="javax.swing.JButton" name="brushButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Brush"/>
             <Property name="toolTipText" type="java.lang.String" value="Freehand"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BrushButton1">
+        <Component class="javax.swing.JButton" name="lineButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Line"/>
             <Property name="toolTipText" type="java.lang.String" value="Draw a line"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BrushButton2">
+        <Component class="javax.swing.JButton" name="ellipseButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Elipse"/>
             <Property name="toolTipText" type="java.lang.String" value="Draw a elipse"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BrushButton3">
+        <Component class="javax.swing.JButton" name="rectangleButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Rectangle"/>
             <Property name="toolTipText" type="java.lang.String" value="Draw a rectangle"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="colorPickerButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Color picker"/>
           </Properties>

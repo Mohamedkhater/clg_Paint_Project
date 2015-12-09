@@ -46,11 +46,11 @@ public class Paint0 extends javax.swing.JFrame
     {
 
         ButtonPanel = new javax.swing.JPanel();
-        BrushButton = new javax.swing.JButton();
-        BrushButton1 = new javax.swing.JButton();
-        BrushButton2 = new javax.swing.JButton();
-        BrushButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        brushButton = new javax.swing.JButton();
+        lineButton = new javax.swing.JButton();
+        ellipseButton = new javax.swing.JButton();
+        rectangleButton = new javax.swing.JButton();
+        colorPickerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -62,19 +62,19 @@ public class Paint0 extends javax.swing.JFrame
         ButtonPanel.setMaximumSize(new java.awt.Dimension(113, 73));
         ButtonPanel.setMinimumSize(new java.awt.Dimension(113, 73));
 
-        BrushButton.setText("Brush");
-        BrushButton.setToolTipText("Freehand");
+        brushButton.setText("Brush");
+        brushButton.setToolTipText("Freehand");
 
-        BrushButton1.setText("Line");
-        BrushButton1.setToolTipText("Draw a line");
+        lineButton.setText("Line");
+        lineButton.setToolTipText("Draw a line");
 
-        BrushButton2.setText("Elipse");
-        BrushButton2.setToolTipText("Draw a elipse");
+        ellipseButton.setText("Elipse");
+        ellipseButton.setToolTipText("Draw a elipse");
 
-        BrushButton3.setText("Rectangle");
-        BrushButton3.setToolTipText("Draw a rectangle");
+        rectangleButton.setText("Rectangle");
+        rectangleButton.setToolTipText("Draw a rectangle");
 
-        jButton1.setText("Color picker");
+        colorPickerButton.setText("Color picker");
 
         javax.swing.GroupLayout ButtonPanelLayout = new javax.swing.GroupLayout(ButtonPanel);
         ButtonPanel.setLayout(ButtonPanelLayout);
@@ -83,26 +83,26 @@ public class Paint0 extends javax.swing.JFrame
             .addGroup(ButtonPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BrushButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(BrushButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(BrushButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(BrushButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(brushButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(lineButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(ellipseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(rectangleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(colorPickerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ButtonPanelLayout.setVerticalGroup(
             ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BrushButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(brushButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BrushButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BrushButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ellipseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BrushButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rectangleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(colorPickerButton)
                 .addContainerGap(206, Short.MAX_VALUE))
         );
 
@@ -152,11 +152,11 @@ public class Paint0 extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BrushButton;
-    private javax.swing.JButton BrushButton1;
-    private javax.swing.JButton BrushButton2;
-    private javax.swing.JButton BrushButton3;
     private javax.swing.JPanel ButtonPanel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton brushButton;
+    private javax.swing.JButton colorPickerButton;
+    private javax.swing.JButton ellipseButton;
+    private javax.swing.JButton lineButton;
+    private javax.swing.JButton rectangleButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,109 +23,121 @@ import javax.swing.event.ChangeListener;
 public final class PaintBrushApp extends JFrame
 {
 
-    JButton BrashBut, EllipseBut, RectangleBut, LineBut, StrokeBut, FillBut, clear;
+    // Control buttons
+    JButton brushButton, ellipseButton, rectangleButton, lineButton, fillButton, strokeButton, clearButton;
+
+    // Last performed action ( default set to freehand brush )
     int recentActionValue = 1;
+
+    // Default shape properties
     Color fillColor = Color.BLACK;
     Color strokeColor;
-    JLabel transLabel;
-    JSlider tranSlider;
-    DecimalFormat dec = new DecimalFormat("#.##");
+
+    // Transperancy settings
+    JLabel transperancyLabel;
+    JSlider transparencySlider;
+
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
     Graphics2D graphicalDrawing;
 
-    float transparentVal = 1.0f;
+    float transparencyValue = 1.0f;
 
     PaintBrushApp()
     {
 
-        JFrame frame = new JFrame();
+        JFrame mainFrame = new JFrame();
 
-        final Container content = frame.getContentPane();
+        // Get a handle to the contents of the frame
+        final Container mainFrameContents = mainFrame.getContentPane();
 
-        setIconImage(new ImageIcon("./src/images/defaultIcon.png").getImage());
-        setTitle("PaintBrush");
-        setSize(1200, 550);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // Peo of the main window
+        this.setIconImage(new ImageIcon("./src/images/defaultIcon.png").getImage());
+        this.setTitle("PaintBrush");
+        this.setSize(1200, 550);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JPanel thePanel = new JPanel();
+        // Panel contained in the JFrame
+        JPanel controlButtonsPanel = new JPanel();
 
-        JMenuBar mb = new JMenuBar();
+        // Menu bar for file / help menues
+        JMenuBar menuBar = new JMenuBar();
         JMenu graphicsMenu = new JMenu("File");
         JMenu helpMenu = new JMenu("Help");
-        mb.add(graphicsMenu);
-        mb.add(helpMenu);
-        setJMenuBar(mb);
-        JMenuItem item1 = new JMenuItem("New");
-        JMenuItem item2 = new JMenuItem("How To Draw");
-        graphicsMenu.add(item1);
-        helpMenu.add(item2);
-        item1.addActionListener(new ActionListener()
+
+        // Add the sub-menus items to the menubar
+        menuBar.add(graphicsMenu);
+        menuBar.add(helpMenu);
+
+        // Set the menu bar for this JFrame
+        this.setJMenuBar(menuBar);
+
+        JMenuItem newMenuButton = new JMenuItem("New");
+        graphicsMenu.add(newMenuButton);
+
+        JMenuItem howToDrawMenuButton = new JMenuItem("How To Draw");
+        helpMenu.add(howToDrawMenuButton);
+
+        newMenuButton.addActionListener(new ActionListener()
         {
 
             public void actionPerformed(ActionEvent e)
             {
-
+                // Action that happens when the "New" menu is pressed
             }
         });
 
         final Canvas drawPad = new Canvas();
 
-        Box theBox = Box.createVerticalBox();
+        Box buttonBox = Box.createVerticalBox();
 
         // Create the shape button objects
-        BrashBut = addImageToButtons("./src/images/brushIcon.png", 1);
-        EllipseBut = addImageToButtons("./src/images/Ellipse.png", 3);
-        RectangleBut = addImageToButtons("./src/images/Rectangle.png", 4);
-        LineBut = addImageToButtons("./src/images/Line.png", 2);
+        brushButton = addImageToButtons("./src/images/brushIcon.png", 1, "Brush");
+        ellipseButton = addImageToButtons("./src/images/Ellipse.png", 3, "Ellipse");
+        rectangleButton = addImageToButtons("./src/images/Rectangle.png", 4, "Rectangle");
+        lineButton = addImageToButtons("./src/images/Line.png", 2, "Line");
 
         // Create the control button objects
-        FillBut = addImageToColorButtons("./src/images/Fill.png", 5, true);
-        StrokeBut = addImageToColorButtons("./src/images/Stroke.png", 7, false);
+        strokeButton = addImageToColorButtons("./src/images/Fill.png", 5, true, "Stroke");
+        fillButton = addImageToColorButtons("./src/images/Stroke.png", 7, false, "Fill");
 
-        clear = new JButton("CLEAR");
+        clearButton = new JButton("CLEAR");
 
-        RectangleBut.setPreferredSize(new Dimension(2, 26));
-
-        BrashBut.setToolTipText("Brash");
-        EllipseBut.setToolTipText("Ellise");
-        RectangleBut.setToolTipText("Rectangle");
-        LineBut.setToolTipText("Line");
-        FillBut.setToolTipText("Fill");
-        StrokeBut.setToolTipText("Stroke");
+        rectangleButton.setPreferredSize(new Dimension(100, 100));
 
         // Add items to the vertical box ( stack panel )
-        theBox.add(BrashBut);
-        theBox.add(LineBut);
-        theBox.add(EllipseBut);
-        theBox.add(RectangleBut);
+        buttonBox.add(brushButton);
+        buttonBox.add(lineButton);
+        buttonBox.add(ellipseButton);
+        buttonBox.add(rectangleButton);
 
-        theBox.add(StrokeBut);
-        theBox.add(FillBut);
-        theBox.add(clear);
+        buttonBox.add(fillButton);
+        buttonBox.add(strokeButton);
+        buttonBox.add(clearButton);
 
-        transLabel = new JLabel("Transparency: 1 ");
-        tranSlider = new JSlider(1, 99, 99);
+        transperancyLabel = new JLabel("Transparency: 1 ");
+        transparencySlider = new JSlider(1, 99, 99);
 
         ListenForSlider lSlider = new ListenForSlider();
-        tranSlider.addChangeListener(lSlider);
+        transparencySlider.addChangeListener(lSlider);
 
-        theBox.add(transLabel);
-        theBox.add(tranSlider);
+        buttonBox.add(transperancyLabel);
+        buttonBox.add(transparencySlider);
 
-        thePanel.add(theBox);
-        thePanel.setBackground(Color.CYAN);
-        content.add(drawPad, BorderLayout.CENTER);
-        content.setBackground(Color.WHITE);
+        controlButtonsPanel.add(buttonBox);
+        controlButtonsPanel.setBackground(Color.CYAN);
+        mainFrameContents.add(drawPad, BorderLayout.CENTER);
+        mainFrameContents.setBackground(Color.WHITE);
 
-        content.add(thePanel, BorderLayout.WEST);
-        add(content);
+        mainFrameContents.add(controlButtonsPanel, BorderLayout.WEST);
+        this.add(mainFrameContents);
 
         //content.add(panel, BorderLayout.CENTER);
-        clear.addActionListener(new ActionListener()
+        clearButton.addActionListener(new ActionListener()
         {
 
             public void actionPerformed(ActionEvent e)
             {
-                if (e.getSource() == clear)
+                if (e.getSource() == clearButton)
                 {
                     drawPad.clear();
                 }
@@ -134,51 +146,58 @@ public final class PaintBrushApp extends JFrame
 
     }
 
-    public JButton addImageToButtons(String iconfile, final int activeNumber)
+    public JButton addImageToButtons(String iconFile, final int actionCommandNumber, String tooltipText)
     {
         // This method creates the shape button object and sets the action number for it
         // Controller
 
-        JButton thebut = new JButton();
-        Icon buttonicon = new ImageIcon(iconfile);
-        thebut.setIcon(buttonicon);
-        thebut.addActionListener(new ActionListener()
+        JButton button = new JButton();
+        button.setText(tooltipText);
+        button.setToolTipText(tooltipText);
+
+        //Icon buttonIcon = new ImageIcon(iconFile);
+        //button.setIcon(buttonIcon);
+        //button.setSize(100, 200);
+        button.addActionListener(new ActionListener()
         {
 
             // Add the action listner to this button            
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // Set the number of the active shape
-                recentActionValue = activeNumber;
+                // Set the number of the active shape to know the last pressed button
+                recentActionValue = actionCommandNumber;
 
             }
         });
-
-        return thebut;
-
+        return button;
     }
 
-    public JButton addImageToColorButtons(String iconfile, final int activeNumber, final boolean stroke)
+    public JButton addImageToColorButtons(String iconfile, final int activeNumber,
+            final boolean stroke, String text)
     {
 
         // This method creates the control button object and sets the action number for it
         // Controller
-        JButton thebut = new JButton();
-        Icon buttonicon = new ImageIcon(iconfile);
-        thebut.setIcon(buttonicon);
-        thebut.addActionListener((ActionEvent e) ->
+        JButton button = new JButton();
+        button.setText(text);
+        
+        //Icon buttonicon = new ImageIcon(iconfile);
+        //button.setIcon(buttonicon);
+        
+        button.addActionListener((ActionEvent e) ->
         {
             if (stroke)
             {
-                strokeColor = JColorChooser.showDialog(null, "choose a color", Color.BLACK);
+                // Create the 
+                strokeColor = JColorChooser.showDialog(null, "Choose stroke color", Color.BLACK);
             }
             else
             {
-                fillColor = JColorChooser.showDialog(null, "choose a color", Color.BLACK);
+                fillColor = JColorChooser.showDialog(null, "Choose fill color", Color.BLACK);
             }
         });
-        return thebut;
+        return button;
 
     }
 
@@ -189,7 +208,7 @@ public final class PaintBrushApp extends JFrame
     {
 
         // Drawing area - controller package
-
+        // Shape is an interface, make an abstract class and inherit from this interface
         ArrayList<Shape> shapes = new ArrayList<Shape>();
         ArrayList<Color> shapeFill = new ArrayList<Color>();
         ArrayList<Color> shapeStroke = new ArrayList<Color>();
@@ -206,6 +225,7 @@ public final class PaintBrushApp extends JFrame
                 @Override
                 public void mousePressed(MouseEvent e)
                 {
+
                     if (recentActionValue != 1)
                     {
 
@@ -223,25 +243,33 @@ public final class PaintBrushApp extends JFrame
                     {
 
                         Shape aShape = null;
-                        if (recentActionValue == 2)
+                        switch (recentActionValue)
                         {
-                            aShape = drawLine(drawingStartingPoint.x, drawingStartingPoint.y, e.getX(), e.getY());
-                        }
-                        else if (recentActionValue == 3)
-                        {
-
-                            aShape = drawEllipse(drawingStartingPoint.x, drawingStartingPoint.y, e.getX(), e.getY());
-                        }
-
-                        else if (recentActionValue == 4)
-                        {
-                            aShape = drawRectangle(drawingStartingPoint.x, drawingStartingPoint.y, e.getX(), e.getY());
+                            case 2:
+                                aShape = drawLine(drawingStartingPoint.x,
+                                        drawingStartingPoint.y,
+                                        e.getX(),
+                                        e.getY());
+                                break;
+                            case 3:
+                                aShape = drawEllipse(drawingStartingPoint.x,
+                                        drawingStartingPoint.y,
+                                        e.getX(),
+                                        e.getY());
+                                break;
+                            case 4:
+                                aShape = drawRectangle(drawingStartingPoint.x,
+                                        drawingStartingPoint.y,
+                                        e.getX(),
+                                        e.getY());
+                                break;
+                            default:
                         }
 
                         shapes.add(aShape);
                         shapeFill.add(fillColor);
                         shapeStroke.add(strokeColor);
-                        transPersent.add(transparentVal);
+                        transPersent.add(transparencyValue);
 
                         drawingStartingPoint = null;
                         drawingEndingPoint = null;
@@ -272,7 +300,7 @@ public final class PaintBrushApp extends JFrame
                         shapes.add(aShape);
                         shapeFill.add(fillColor);
                         shapeStroke.add(strokeColor);
-                        transPersent.add(transparentVal);
+                        transPersent.add(transparencyValue);
                     }
 
                     drawingEndingPoint = new Point(e.getX(), e.getY());
@@ -295,7 +323,10 @@ public final class PaintBrushApp extends JFrame
 
             for (Shape s : shapes)
             {
-                graphicalDrawing.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transCounter.next()));
+                graphicalDrawing.setComposite(
+                        AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+                                transCounter.next()));
+
                 graphicalDrawing.setPaint(strokeCounter.next());
                 graphicalDrawing.draw(s);
                 graphicalDrawing.setPaint(fillCounter.next());
@@ -305,23 +336,35 @@ public final class PaintBrushApp extends JFrame
             if (drawingStartingPoint != null && drawingEndingPoint != null)
             {
 
-                graphicalDrawing.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.40f));
+                graphicalDrawing.setComposite(
+                        AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+                                0.40f));
+
                 graphicalDrawing.setPaint(Color.BLACK);
 
                 Shape aShape = null;
 
-                if (recentActionValue == 2)
+                switch (recentActionValue)
                 {
-                    aShape = drawLine(drawingStartingPoint.x, drawingStartingPoint.y, drawingEndingPoint.x, drawingEndingPoint.y);
-
-                }
-                else if (recentActionValue == 3)
-                {
-                    aShape = drawEllipse(drawingStartingPoint.x, drawingStartingPoint.y, drawingEndingPoint.x, drawingEndingPoint.y);
-                }
-                else if (recentActionValue == 4)
-                {
-                    aShape = drawRectangle(drawingStartingPoint.x, drawingStartingPoint.y, drawingEndingPoint.x, drawingEndingPoint.y);
+                    case 2:
+                        aShape = drawLine(drawingStartingPoint.x,
+                                drawingStartingPoint.y,
+                                drawingEndingPoint.x,
+                                drawingEndingPoint.y);
+                        break;
+                    case 3:
+                        aShape = drawEllipse(drawingStartingPoint.x,
+                                drawingStartingPoint.y,
+                                drawingEndingPoint.x,
+                                drawingEndingPoint.y);
+                        break;
+                    case 4:
+                        aShape = drawRectangle(drawingStartingPoint.x,
+                                drawingStartingPoint.y,
+                                drawingEndingPoint.x,
+                                drawingEndingPoint.y);
+                        break;
+                    default:
                 }
 
                 graphicalDrawing.draw(aShape);
@@ -382,16 +425,18 @@ public final class PaintBrushApp extends JFrame
 
     public class ListenForSlider implements ChangeListener
     {
-            // This method shall be in the view
+
+        // This method shall be in the view
         @Override
         public void stateChanged(ChangeEvent e)
         {
 
-            if (e.getSource() == tranSlider)
+            if (e.getSource() == transparencySlider)
             {
-                transLabel.setText("Transparent :" + dec.format(tranSlider.getValue() * .01));
+                transperancyLabel.setText("Transparency :"
+                        + decimalFormat.format(transparencySlider.getValue() * .01));
 
-                transparentVal = (float) (tranSlider.getValue() * .01);
+                transparencyValue = (float) (transparencySlider.getValue() * .01);
 
             }
 
