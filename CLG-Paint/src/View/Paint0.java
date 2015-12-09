@@ -7,6 +7,9 @@ package View;
 
 import java.awt.Container;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -17,6 +20,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Paint0 extends javax.swing.JFrame
 {
+
     Graphics2D gDraws;
     public static JFrame FrameHandle;
 
@@ -28,11 +32,12 @@ public class Paint0 extends javax.swing.JFrame
 
         initComponents();
         FrameHandle = this;
-      
+
         DrawingCanvas c = new DrawingCanvas();
 
         final Container content = this.getContentPane();
-        content.add(c);        
+        content.add(c);
+
     }
 
     /**
@@ -139,7 +144,7 @@ public class Paint0 extends javax.swing.JFrame
         {
             ex.printStackTrace();
         }
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable()
         {
@@ -149,6 +154,26 @@ public class Paint0 extends javax.swing.JFrame
 
             }
         });
+    }
+
+    private JButton buttonCreator(String buttonText, String actionCommand)
+    {
+        JButton button = new JButton(buttonText);
+        button.setActionCommand(actionCommand);
+        button.setSize(150, 70);
+
+        button.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                // What the button will do when it's clicked
+            }
+        });
+        
+        ButtonPanel.add(button);
+        return button;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
