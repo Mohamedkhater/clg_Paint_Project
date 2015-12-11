@@ -23,6 +23,8 @@ public class Paint0 extends javax.swing.JFrame
 
     Graphics2D gDraws;
     public static JFrame FrameHandle;
+        public static String currentType = "Line"; //CHANGE
+    public static String color = "Black"; //CHANGE
 
     /**
      * Creates new form Paint0
@@ -168,7 +170,13 @@ public class Paint0 extends javax.swing.JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // What the button will do when it's clicked
+                if (e.getSource() == lineButton) {
+                    currentType = "Line";
+                } else if (e.getSource() == ellipseButton) {
+                    currentType = "Ellipse";
+                } else if (e.getSource() == rectangleButton) {
+                    currentType = "Ellipse";
+                }
             }
         });
         
