@@ -25,6 +25,7 @@ public class DrawingCanvas extends JComponent
 {
 
     int x1, y1;
+    int x, y, distance;
     Graphics2D g;
 
     public DrawingCanvas()
@@ -67,7 +68,9 @@ public class DrawingCanvas extends JComponent
             @Override
             public void mouseReleased(MouseEvent e)
             {
-                // Mouse release button, final drawing of the shape
+                Controller.go(x, y, x1, y1, distance);
+                Controller.go = true;
+                //Transfer coordinates to Controller, set go boolean to draw
             }
         });
 
