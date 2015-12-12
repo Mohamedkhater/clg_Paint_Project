@@ -5,12 +5,19 @@
  */
 package View;
 
+import Controller.BizLogic;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -24,14 +31,34 @@ public class Paint0 extends javax.swing.JFrame
     Graphics2D gDraws;
     public static JFrame FrameHandle;
 
+    JButton rectButton, lineButton, fillButton, strokeButton, ellipseButton, selectButton;
+    private static JMenuBar menuBar = new JMenuBar();
+
+    Point nextButtonLocation = new Point(0, 0);
+    Dimension nextButtonDimensions = new Dimension(0, 0);
+
     /**
      * Creates new form Paint0
      */
     public Paint0()
     {
-
         initComponents();
         FrameHandle = this;
+
+        rectButton = buttonCreator("Rectangle", "rect", 0, 12);
+        lineButton = buttonCreator("Line", "line", 0, 12);
+        fillButton = buttonCreator("Fill Color", "fill", 0, 12);
+        strokeButton = buttonCreator("Stroke Color", "stroke", 0, 12);
+        selectButton = buttonCreator("Select", "select", 0, 12);
+
+        // Add menus
+        MenuBarItem fileMenu = new MenuBarItem(("File"));
+        fileMenu.AddSubmenus(new String[]
+        {
+            "New", "Open", "Save", "Save As"
+        });
+
+        menubarCreator(fileMenu);
 
         DrawingCanvas c = new DrawingCanvas();
 
@@ -50,65 +77,27 @@ public class Paint0 extends javax.swing.JFrame
     private void initComponents()
     {
 
-        ButtonPanel = new javax.swing.JPanel();
-        brushButton = new javax.swing.JButton();
-        lineButton = new javax.swing.JButton();
-        ellipseButton = new javax.swing.JButton();
-        rectangleButton = new javax.swing.JButton();
-        colorPickerButton = new javax.swing.JButton();
+        buttonPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(1000, 700));
         setResizable(false);
 
-        ButtonPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
-        ButtonPanel.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonPanel.setMaximumSize(new java.awt.Dimension(113, 73));
-        ButtonPanel.setMinimumSize(new java.awt.Dimension(113, 73));
+        buttonPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(250, 250, 250)));
+        buttonPanel.setForeground(new java.awt.Color(255, 255, 255));
+        buttonPanel.setMaximumSize(new java.awt.Dimension(113, 73));
+        buttonPanel.setMinimumSize(new java.awt.Dimension(113, 73));
 
-        brushButton.setText("Brush");
-        brushButton.setToolTipText("Freehand");
-
-        lineButton.setText("Line");
-        lineButton.setToolTipText("Draw a line");
-
-        ellipseButton.setText("Elipse");
-        ellipseButton.setToolTipText("Draw a elipse");
-
-        rectangleButton.setText("Rectangle");
-        rectangleButton.setToolTipText("Draw a rectangle");
-
-        colorPickerButton.setText("Color picker");
-
-        javax.swing.GroupLayout ButtonPanelLayout = new javax.swing.GroupLayout(ButtonPanel);
-        ButtonPanel.setLayout(ButtonPanelLayout);
-        ButtonPanelLayout.setHorizontalGroup(
-            ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(brushButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(lineButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(ellipseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(rectangleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(colorPickerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        javax.swing.GroupLayout buttonPanelLayout = new javax.swing.GroupLayout(buttonPanel);
+        buttonPanel.setLayout(buttonPanelLayout);
+        buttonPanelLayout.setHorizontalGroup(
+            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 111, Short.MAX_VALUE)
         );
-        ButtonPanelLayout.setVerticalGroup(
-            ButtonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(brushButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ellipseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rectangleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(colorPickerButton)
-                .addContainerGap(206, Short.MAX_VALUE))
+        buttonPanelLayout.setVerticalGroup(
+            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 482, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,14 +106,14 @@ public class Paint0 extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(490, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ButtonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -156,32 +145,68 @@ public class Paint0 extends javax.swing.JFrame
         });
     }
 
-    private JButton buttonCreator(String buttonText, String actionCommand)
+    // This method creates a button adds a text and action command to it
+    private JButton buttonCreator(String buttonText, String actionCommand, int xSpacing, int ySpacing)
     {
+        // The new button location will be the modified location of the last button
+        Point currentButotnLocation = nextButtonLocation;
+
+        // Set button properties
         JButton button = new JButton(buttonText);
         button.setActionCommand(actionCommand);
-        button.setSize(150, 70);
+        button.setSize(100, 50);
+        button.setLocation(currentButotnLocation);
+
+        // Save the location and dimensions of the last created button
+        Point buttonLocation = button.getLocation();
+        Dimension buttonDimension = button.getSize();
+        nextButtonLocation.setLocation(
+                buttonLocation.x + xSpacing,
+                buttonLocation.y + buttonDimension.height + ySpacing);
+        nextButtonDimensions.setSize(button.getWidth(), button.getHeight());
 
         button.addActionListener(new ActionListener()
         {
-
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 // What the button will do when it's clicked
             }
         });
-        
-        ButtonPanel.add(button);
+
+        buttonPanel.add(button);
         return button;
     }
 
+    private void menubarCreator(MenuBarItem menuItems)
+    {
+        // Get the list that conains the submenu names
+        LinkedList<String> menuNames = menuItems.getChildrenNames();
+
+        for (String name : menuNames)
+        {
+            // Create a new object menu and set its name
+            JMenu menu = new JMenu();
+            menu.setText(name);
+            
+            // Set each item action command as its name
+            menu.setActionCommand(name);
+
+            menu.addActionListener(new ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    // Action that happens when the menu is pressed
+                    // method in the controller will check the action command
+                    BizLogic.MenuActions(menu.getActionCommand());
+                }
+            });
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ButtonPanel;
-    private javax.swing.JButton brushButton;
-    private javax.swing.JButton colorPickerButton;
-    private javax.swing.JButton ellipseButton;
-    private javax.swing.JButton lineButton;
-    private javax.swing.JButton rectangleButton;
+    private javax.swing.JPanel buttonPanel;
     // End of variables declaration//GEN-END:variables
 }

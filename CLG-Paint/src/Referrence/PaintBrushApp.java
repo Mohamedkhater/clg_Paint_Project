@@ -50,7 +50,7 @@ public final class PaintBrushApp extends JFrame
         // Get a handle to the contents of the frame
         final Container mainFrameContents = mainFrame.getContentPane();
 
-        // Peo of the main window
+        // Properties of the main window
         this.setIconImage(new ImageIcon("./src/images/defaultIcon.png").getImage());
         this.setTitle("PaintBrush");
         this.setSize(1200, 550);
@@ -61,22 +61,10 @@ public final class PaintBrushApp extends JFrame
 
         // Menu bar for file / help menues
         JMenuBar menuBar = new JMenuBar();
+
         JMenu graphicsMenu = new JMenu("File");
-        JMenu helpMenu = new JMenu("Help");
-
-        // Add the sub-menus items to the menubar
-        menuBar.add(graphicsMenu);
-        menuBar.add(helpMenu);
-
-        // Set the menu bar for this JFrame
-        this.setJMenuBar(menuBar);
-
         JMenuItem newMenuButton = new JMenuItem("New");
         graphicsMenu.add(newMenuButton);
-
-        JMenuItem howToDrawMenuButton = new JMenuItem("How To Draw");
-        helpMenu.add(howToDrawMenuButton);
-
         newMenuButton.addActionListener(new ActionListener()
         {
 
@@ -85,6 +73,17 @@ public final class PaintBrushApp extends JFrame
                 // Action that happens when the "New" menu is pressed
             }
         });
+
+        JMenu helpMenu = new JMenu("Help");
+        JMenuItem howToDrawMenuButton = new JMenuItem("How To Draw");
+        helpMenu.add(howToDrawMenuButton);
+
+        // Add the sub-menus items to the menubar
+        menuBar.add(graphicsMenu);
+        menuBar.add(helpMenu);
+
+        // Set the menu bar for this JFrame
+        this.setJMenuBar(menuBar);
 
         final Canvas drawPad = new Canvas();
 
@@ -181,10 +180,9 @@ public final class PaintBrushApp extends JFrame
         // Controller
         JButton button = new JButton();
         button.setText(text);
-        
+
         //Icon buttonicon = new ImageIcon(iconfile);
         //button.setIcon(buttonicon);
-        
         button.addActionListener((ActionEvent e) ->
         {
             if (stroke)
