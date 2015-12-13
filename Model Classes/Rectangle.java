@@ -31,16 +31,27 @@ public class Rectangle extends Shape {
         this.height = height;
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
+    public void draw(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setBackground(Color.getColor(wallColour));
-        //g2d.setColor(Color.getColor(borderColour));
         g2d.drawRect(getCentreX(), getCentreY(), width, height);
-        //g2d.setColor(Color.getColor(fillColour));
+    }
+
+    public void fill(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
         g2d.fillRect(getCentreX(), getCentreY(), width, height);
     }
-    
-}
 
+    /*
+     @Override
+     public void paintComponent(Graphics g) {
+     super.paintComponent(g);
+     Graphics2D g2d = (Graphics2D) g;
+     g2d.setBackground(Color.getColor(wallColour));
+     g2d.setColor(Color.getColor(borderColour));
+     g2d.drawRect(getCentreX(), getCentreY(), width, height);
+     g2d.setColor(Color.getColor(fillColour));
+     g2d.fillRect(getCentreX(), getCentreY(), width, height);
+     */
+}

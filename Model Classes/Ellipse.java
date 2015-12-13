@@ -38,15 +38,29 @@ public class Ellipse extends Shape{
         this.diameter2 = diameter2;
     }
     
+    public void draw(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawOval(getCentreX(), getCentreY(), diameter1, diameter2);
+    }
+    
+    public void fill(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.fillOval(getCentreX(), getCentreY(), diameter1, diameter2);
+    }
+    
+    /*
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setBackground(Color.getColor(wallColour));
-        //g2d.setColor(Color.getColor(borderColour));
+        g2d.setBackground(Color.getColor(wallColour));
+        g2d.setColor(Color.getColor(borderColour));
         g2d.drawOval(getCentreX(), getCentreY(), diameter1, diameter2);
-        //g2d.setColor(Color.getColor(fillColour));
+        g2d.setColor(Color.getColor(fillColour));
         g2d.fillOval(getCentreX(), getCentreY(), diameter1, diameter2);
     }
+    */
     
 }

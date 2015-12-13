@@ -5,9 +5,6 @@
  */
 package paint;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 /**
@@ -77,6 +74,13 @@ public class Shape extends JPanel {
         this.wallColour = wallColour;
     }
     
+    public void draw(){
+    }
+    
+    public void fill(){ 
+    }
+    
+    /*
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -85,4 +89,6 @@ public class Shape extends JPanel {
         g2d.setColor(Color.getColor(borderColour));
         g2d.setColor(Color.getColor(fillColour));
     }
+    */
+    
 }

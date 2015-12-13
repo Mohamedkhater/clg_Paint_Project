@@ -51,20 +51,37 @@ public class Triangle extends Shape {
         z[1] = ypt3;
         return z;
     }
-
+    
+    public void draw(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        int[] x = {xpt1, xpt2, xpt3};
+        int[] y = {ypt1, ypt2, ypt3};
+        g2d.drawPolyline(x, y, 3);
+    }
+    
+    public void fill(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        int[] x = {xpt1, xpt2, xpt3};
+        int[] y = {ypt1, ypt2, ypt3};
+        g2d.fillPolygon(x, y, 3);
+    }
+    
+    /*
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        //g2d.setBackground(Color.getColor(wallColour));
-        //g2d.setColor(Color.getColor(borderColour));
-        /*g2d.drawLine(xpt1, ypt1, xpt2, ypt2);
+        g2d.setBackground(Color.getColor(wallColour));
+        g2d.setColor(Color.getColor(borderColour));
+        g2d.drawLine(xpt1, ypt1, xpt2, ypt2);
         g2d.drawLine(xpt2, ypt2, xpt3, ypt3);
-        g2d.drawLine(xpt3, ypt3, xpt1, ypt1);*/
+        g2d.drawLine(xpt3, ypt3, xpt1, ypt1);
         int[] x = {xpt1, xpt2, xpt3};
         int[] y = {ypt1, ypt2, ypt3};
         g2d.drawPolyline(x, y, 3);
         g2d.fillPolygon(x, y, 3);
-    }
+    }*/
 
 }

@@ -51,6 +51,13 @@ public class Line extends Shape {
         this.yEnd = yEnd;
     }
 
+    public void draw(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawLine(xStart, yStart, xEnd, yEnd);
+    }
+    
+    /*
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -58,6 +65,6 @@ public class Line extends Shape {
         //g2d.setBackground(Color.getColor(wallColour));
         //g2d.setColor(Color.getColor(borderColour));
         g2d.drawLine(xStart, yStart, xEnd, yEnd);
-    }
+    }*/
     
 }
